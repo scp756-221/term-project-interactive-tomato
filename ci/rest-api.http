@@ -1,0 +1,4 @@
+# A collection of REST APIs for testing purposes.
+
+# db service
+GET http://localhost:30002/api/v1/datastore/health

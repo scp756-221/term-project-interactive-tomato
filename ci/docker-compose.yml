@@ -1,0 +1,22 @@
+services:
+  dynamodb-local:
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
+    image: "amazon/dynamodb-local:latest"
+    container_name: dynamodb-local
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./docker/dynamodb:/home/dynamodblocal/data"
+    working_dir: /home/dynamodblocal
+  cmpt756db:
+    build: ../db
+    image: ci_db
+    container_name: cmpt756db
+    ports:
+      - "30002:30002"
+    environment:
+      AWS_REGION: 'us-west-2'
+      AWS_ACCESS_KEY_ID: 'DUMMY_KEY_ID'
+      AWS_SECRET_ACCESS_KEY: 'DUMMY_ACCESS_KEY'
+      SVC_LOADER_TOKEN: 'DUMMY_LOADER_TOKEN'
+      DYNAMODB_URL: 'http://dynamodb-local:8000'
