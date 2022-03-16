@@ -1,4 +1,33 @@
 # A collection of REST APIs for testing purposes.
 
 # db service
+### health check
 GET http://localhost:30002/api/v1/datastore/health
+
+# artist service
+### health check
+GET http://localhost:30003/api/v1/artist/health
+
+### create a new artist
+POST http://localhost:30003/api/v1/artist/
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "year": 1980
+}
+
+### get an artist's info
+GET http://localhost:30003/api/v1/artist/<artist_id>
+
+### update an artist
+PUT http://localhost:30003/api/v1/artist/<artist_id>
+Content-Type: application/json
+
+{
+  "name": "Jane Doe",
+  "year": 1985
+}
+
+### delete an artist
+DELETE http://localhost:30003/api/v1/artist/<artist_id>

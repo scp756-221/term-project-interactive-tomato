@@ -20,3 +20,27 @@ services:
       AWS_SECRET_ACCESS_KEY: 'DUMMY_ACCESS_KEY'
       SVC_LOADER_TOKEN: 'DUMMY_LOADER_TOKEN'
       DYNAMODB_URL: 'http://dynamodb-local:8000'
+  cmpt756artist:
+    depends_on:
+      - dynamodb-local
+      - cmpt756db
+    build: ../artist
+    image: ci_artist
+    container_name: cmpt756artist
+    ports:
+      - "30003:30003"
+  test:
+    command: "pytest --user_address cmpt756user --user_port 30000 --music_address cmpt756music --music_port 30001 --artist_address cmpt756artist --artist_port 30003 --table_suffix interactive-tomato"
+    depends_on:
+      - dynamodb-local
+      - cmpt756db
+      - cmpt756artist
+    build: ../test
+    image: ci_test
+    container_name: test
+    environment:
+      AWS_REGION: 'us-west-2'
+      AWS_ACCESS_KEY_ID: 'DUMMY_KEY_ID'
+      AWS_SECRET_ACCESS_KEY: 'DUMMY_ACCESS_KEY'
+      SVC_LOADER_TOKEN: 'DUMMY_LOADER_TOKEN'
+      DYNAMODB_URL: 'http://dynamodb-local:8000'
