@@ -13,21 +13,24 @@ POST http://localhost:30003/api/v1/artist/
 Content-Type: application/json
 
 {
-  "name": "John Doe",
-  "year": 1980
+  "fname": "John Doe",
+  "byear": 1980
 }
 
 ### get an artist's info
-GET http://localhost:30003/api/v1/artist/<artist_id>
+GET http://localhost:30003/api/v1/artist/6e2e1082-5e58-45e7-9ad4-4c98627dd132
+Authorization: Bearer xxxxxx
 
 ### update an artist
-PUT http://localhost:30003/api/v1/artist/<artist_id>
+PUT http://localhost:30003/api/v1/artist/6e2e1082-5e58-45e7-9ad4-4c98627dd132
+Authorization: Bearer xxxxxx
 Content-Type: application/json
 
 {
-  "name": "Jane Doe",
-  "year": 1985
+  "fname": "Jane Doe",
+  "byear": 1985
 }
 
 ### delete an artist
-DELETE http://localhost:30003/api/v1/artist/<artist_id>
+DELETE http://localhost:30003/api/v1/artist/6e2e1082-5e58-45e7-9ad4-4c98627dd132
+Authorization: Bearer xxxxxx

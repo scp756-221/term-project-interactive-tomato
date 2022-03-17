@@ -65,15 +65,15 @@ def update_artist(artist_id):
                         mimetype='application/json')
     try:
         content = request.get_json()
-        name = content['name']
-        year = content['year']
+        fname = content['fname']
+        byear = content['byear']
     except Exception:
         return json.dumps({"message": "error reading arguments"})
     url = db['name'] + '/' + db['endpoint'][3]
     response = requests.put(
         url,
         params={"objtype": "artist", "objkey": artist_id},
-        json={"name": name, "year": year})
+        json={"fname": fname, "byear": byear})
     return response.json()
 
 
@@ -86,16 +86,16 @@ def create_artist():
     """
     try:
         content = request.get_json()
-        name = content['name']
-        year = content['year']
+        fname = content['fname']
+        byear = content['byear']
     except Exception:
         return json.dumps({"message": "error reading arguments"})
     url = db['name'] + '/' + db['endpoint'][1]
     response = requests.post(
         url,
         json={"objtype": "artist",
-              "name": name,
-              "year": year})
+              "fname": fname,
+              "byear": byear})
     return response.json()
 
 

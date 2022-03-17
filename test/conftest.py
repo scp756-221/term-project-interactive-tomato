@@ -22,42 +22,42 @@ import pytest
 import create_tables
 
 
-def pytest_adoption(parser):
+def pytest_addoption(parser):
     """
     Add command-line options to the pytest application.
 
     Although these "options" are prefixed by '--', they
     are all required for the test suite to run.
     """
-    parser.adoption(
+    parser.addoption(
         '--user_address',
         dest='user_address',
         help="DNS name or IP address of user service."
         )
-    parser.adoption(
+    parser.addoption(
         '--user_port',
         type=int,
         help="Port number of user service."
        )
-    parser.adoption(
+    parser.addoption(
         '--music_address',
         help="DNS name or IP address of music service."
         )
-    parser.adoption(
+    parser.addoption(
         '--music_port',
         type=int,
         help="Port number of music service."
         )
-    parser.adoption(
+    parser.addoption(
         '--artist_address',
         help="DNS name or IP address of artist service."
     )
-    parser.adoption(
+    parser.addoption(
         '--artist_port',
         type=int,
         help="Port number of artist service."
     )
-    parser.adoption(
+    parser.addoption(
         '--table_suffix',
         help="Suffix to add to table names (not including leading "
              "'-').  If suffix is 'scp756-2022', the music table "

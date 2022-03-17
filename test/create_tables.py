@@ -78,7 +78,7 @@ def create_tables(url, region, access_key_id, secret_access_key, music, user, ar
         TableName=artist,
         AttributeDefinitions=[{
             "AttributeName": "artist_id", "AttributeType": "S"}],
-        KeySchema=[{"AttributeName": "user_id", "KeyType": "HASH"}],
+        KeySchema=[{"AttributeName": "artist_id", "KeyType": "HASH"}],
         ProvisionedThroughput={
             "ReadCapacityUnits": 5, "WriteCapacityUnits": 5}
     )
