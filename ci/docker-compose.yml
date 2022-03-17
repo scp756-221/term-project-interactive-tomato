@@ -29,6 +29,15 @@ services:
     container_name: cmpt756artist
     ports:
       - "30003:30003"
+  cmpt756user:
+    depends_on:
+      - dynamodb-local
+      - cmpt756db
+    build: ../user
+    image: ci_user
+    container_name: cmpt756user
+    ports:
+      - "30000:30000"
   test:
     command: "pytest --user_address cmpt756user --user_port 30000 --music_address cmpt756music --music_port 30001 --artist_address cmpt756artist --artist_port 30003 --table_suffix interactive-tomato"
     depends_on:
