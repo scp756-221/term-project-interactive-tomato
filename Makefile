@@ -43,30 +43,30 @@ init-k8s-ns:
 	kubectl label namespace $(KUBERNETES_NAMESPACE_APP) --overwrite=true istio-injection=enabled
 
 deploy-gateway:
-	kubectl -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/gateway.yaml log/gw.log
+	kubectl -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/service-gateway.yaml > log/gateway.log
 
 # Update S1 and associated monitoring, rebuilding if necessary
 deploy-user:
-	$(KC) -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/s1.yaml | tee log/s1.log
-	$(KC) -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/s1-sm.yaml | tee -a log/s1.log
-	$(KC) -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/s1-vs.yaml | tee -a log/s1.log
+	kubectl -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/user.yaml | tee log/user.log
+	kubectl -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/user-servicemonitor.yaml | tee -a log/user.log
+	kubectl -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/user-virtualservice.yaml | tee -a log/user.log
 
 # Update S2 and associated monitoring, rebuilding if necessary
 deploy-music: rollout-s2
-	$(KC) -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/s2-svc.yaml | tee log/s2.log
-	$(KC) -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/s2-sm.yaml | tee -a log/s2.log
-	$(KC) -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/s2-vs.yaml | tee -a log/s2.log
+	kubectl -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/s2-svc.yaml | tee log/music.log
+	kubectl -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/s2-sm.yaml | tee -a log/music.log
+	kubectl -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/s2-vs.yaml | tee -a log/music.log
 
 # TODO
 deploy-artist:
 
 # Update DB and associated monitoring, rebuilding if necessary
 deploy-db:
-	$(KC) -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/awscred.yaml | tee log/db.log
-	$(KC) -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/dynamodb-service-entry.yaml | tee -a log/db.log
-	$(KC) -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/db.yaml | tee -a log/db.log
-	$(KC) -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/db-sm.yaml | tee -a log/db.log
-	$(KC) -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/db-vs.yaml | tee -a log/db.log
+	kubectl -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/awscred.yaml | tee log/db.log
+	kubectl -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/dynamodb-service-entry.yaml | tee -a log/db.log
+	kubectl -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/db.yaml | tee -a log/db.log
+	kubectl -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/db-sm.yaml | tee -a log/db.log
+	kubectl -n $(KUBERNETES_NAMESPACE_APP) apply -f k8s/db-vs.yaml | tee -a log/db.log
 
 # TODO
 deploy-monitoring:
