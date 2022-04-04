@@ -22,7 +22,7 @@ install-prometheus: init-helm
 # See https://kiali.io/docs/installation/installation-guide/install-with-helm/
 install-kiali:
 	helm install --set cr.create=true --set cr.namespace=$(KUBERNETES_NAMESPACE_ISTIO) --namespace $(KUBERNETES_NAMESPACE_KIALI) --create-namespace $(HELM_RELEASE_KIALI) $(HELM_REPOSITORY_KIALI)/kiali-operator | tee -a log/install-kiali.log
-	kubectl apply -n $(KUBERNETES_NAMESPACE_ISTIO) -f k8s/kiali-cr.yaml | tee -a log/obs-kiali.log
+	kubectl apply -n $(KUBERNETES_NAMESPACE_ISTIO) -f k8s/kiali-cr.yaml | tee -a log/install-kiali.log
 	# Kiali operator can take a while to start Kiali
 	tools/waiteq.sh 'app=kiali' '{.items[*]}'              ''        'Kiali' 'Created'
 	tools/waitne.sh 'app=kiali' '{.items[0].status.phase}' 'Running' 'Kiali' 'Running'
