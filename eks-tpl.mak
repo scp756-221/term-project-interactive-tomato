@@ -29,7 +29,7 @@ EKS_CTX=aws756
 NGROUP=worker-nodes
 NTYPE=t3.medium
 REGION=ZZ-AWS-REGION
-KVER=1.21
+KVER=1.22
 
 
 start: showcontext
