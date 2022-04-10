@@ -1,0 +1,7 @@
+# Header for ConfigMap built from artists.csv
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: artists
+data:
+  artists.csv: |

@@ -1,5 +1,9 @@
 # A collection of REST APIs for testing purposes.
 
+# user service
+### health check
+GET http://localhost:30001/api/v1/user/health
+
 # db service
 ### health check
 GET http://localhost:30002/api/v1/datastore/health
