@@ -54,6 +54,19 @@ object RUser {
 
 }
 
+object RArtist {
+
+  val feeder = csv("artists.csv").eager.circular
+
+  val rartist = forever("i") {
+    feed(feeder)
+    .exec(http("RArtist ${i}")
+      .get("/api/v1/artist/${UUID}"))
+    .pause(1)
+  }
+
+}
+
 /*
   After one S1 read, pause a random time between 1 and 60 s
 */
@@ -79,6 +92,17 @@ object RMusicVarying {
     feed(feeder)
     .exec(http("RMusicVarying ${i}")
       .get("/api/v1/music/${UUID}"))
+    .pause(1, 60)
+  }
+}
+
+object RArtistVarying {
+  val feeder = csv("artists.csv").eager.circular
+
+  val rartist = forever("i") {
+    feed(feeder)
+    .exec(http("RArtistVarying ${i}")
+      .get("/api/v1/artist/${UUID}"))
     .pause(1, 60)
   }
 }
@@ -131,6 +155,15 @@ class ReadMusicSim extends ReadTablesSim {
 
   setUp(
     scnReadMusic.inject(atOnceUsers(Utility.envVarToInt("USERS", 1)))
+  ).protocols(httpProtocol)
+}
+
+class ReadArtistSim extends ReadTablesSim {
+  val scnReadArtist = scenario("ReadArtist")
+    .exec(RArtist.rartist)
+
+  setUp(
+    scnReadArtist.inject(atOnceUsers(Utility.envVarToInt("USERS", 1)))
   ).protocols(httpProtocol)
 }
 
