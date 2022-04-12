@@ -22,24 +22,21 @@ A tool for creating and running dashboards: arrangements of statistics, tables, 
 ### Prometheus
 We use Prometheus to collect and store metrics of microservers deployed on cluster. 
 
-### More
-TODO
-
 ## Microservices
 These microservices implement the functionalities of our application using Flask.
 Each of these services exposes some number of REST APIs for inter-service data exchange as well as the basis of user interaction.
 
 ### DB Service
-A wrapper of DynamoDB as REST APIs, other microservices call these APIs to interact with the database in an easier and more consistent manner.
+`db/` A wrapper of DynamoDB as REST APIs, other microservices call these APIs to interact with the database in an easier and more consistent manner.
 
 ### User Service
-This service provides common functionalities of managing user accounts.
+`s1`: This service provides common functionalities of managing user accounts.
 
 ### Music Service
-This is a service used for adding and updating metadata of songs while also offering search capabilities.
+`s2`: This is a service used for adding and updating metadata of songs while also offering search capabilities.
 
 ### Artist Service
-This service works as an example of introducing a new service to the existing application, enabling maintainers to manage artist/band information.
+`s3`: This service works as an example of introducing a new service to the existing application, enabling maintainers to manage artist/band information.
 
 ## Local/CI Deployment and Testing Using Docker
 Each of the microservice has been containerized (see `Dockerfile` under each folder).
@@ -56,4 +53,4 @@ Aside from deploying microservices and other third-party applications, this `doc
 When the testing container is run, tables will be created for the local DynamoDB instance so that other microservices can query or update the database normally.
 
 ## Working with Clusters
-TODO
+In this project, we use Amazon AWS as cloud platform. run ```make -f eks.mak start``` to create new cluster on AWS
