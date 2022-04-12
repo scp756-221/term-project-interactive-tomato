@@ -17,7 +17,7 @@ Three tables (`User-<team>`, `Music-<team>`, and `Artist-<team>`) are created fo
 A [local version](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html) is available for development and testing purposes, which we are using as a Docker container.
 
 ### Grafana
-TODO
+A tool for creating and running dashboards: arrangements of statistics, tables, and plots that summarize the current state of a distributed system
 
 ### Prometheus
 TODO
