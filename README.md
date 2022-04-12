@@ -17,10 +17,10 @@ Three tables (`User-<team>`, `Music-<team>`, and `Artist-<team>`) are created fo
 A [local version](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html) is available for development and testing purposes, which we are using as a Docker container.
 
 ### Grafana
-A tool for creating and running dashboards: arrangements of statistics, tables, and plots that summarize the current state of a distributed system
+A tool for creating and running dashboards: arrangements of statistics, tables, and plots that summarize the current state of a distributed system.
 
 ### Prometheus
-TODO
+We use Prometheus to collect and store metrics of microservers deployed on cluster. 
 
 ### More
 TODO
